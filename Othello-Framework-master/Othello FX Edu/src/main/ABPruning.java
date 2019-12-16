@@ -1,13 +1,19 @@
 package main;
 
 import com.eudycontreras.othello.models.GameBoardState;
+
+import java.util.List;
+
 import com.eudycontreras.othello.capsules.AgentMove;
 import com.eudycontreras.othello.capsules.MoveWrapper;
+import com.eudycontreras.othello.capsules.ObjectiveWrapper;
 import com.eudycontreras.othello.controllers.AgentController;
 import com.eudycontreras.othello.controllers.Agent;
 import com.eudycontreras.othello.enumerations.PlayerTurn;
 import com.eudycontreras.othello.threading.ThreadManager;
 import com.eudycontreras.othello.threading.TimeSpan;
+
+import sun.management.AgentConfigurationError;
 
 public class ABPruning {
 	/*
@@ -34,9 +40,8 @@ public class ABPruning {
 	    if beta<=alpha  
 	  break          
 	 return minEva 
-	 
-	 ------------------------------------------------------------------------------
-	 
+	 */
+	/*
 	 function minimax(node, depth, isMaximizingPlayer, alpha, beta):
 
     if node is a leaf node :
@@ -64,18 +69,40 @@ public class ABPruning {
 	 */
 	
 	public static MoveWrapper Minimax(GameBoardState gameState, PlayerTurn turn) {
+		int depth = AgentController.MAX_SEARCH_DEPTH;
+		int reward;
 		
+		int j = 0;
+		if (depth == 0) {
+			
+		}
 		//System.out.println("WhiteCount: " + game);
 		if (turn == PlayerTurn.PLAYER_ONE) { //isMaximizingPlayer
 			double maxEva = Double.NEGATIVE_INFINITY;
+			List<ObjectiveWrapper> nodes = AgentController.getAvailableMoves(gameState, turn);
 			
-			for (int i = 0; i < gameState.getChildStates().size(); i++) {
-				System.out.println("WhiteCount: " + gameState.getWhiteCount());
+			for (ObjectiveWrapper node : nodes) {
+				//makeMove(node);
+			}
+			
+			
+			while (j <= depth) {
+				
+			}
+			for (ObjectiveWrapper node : nodes) {
+				System.out.println("Possible move: ");
 				
 			}
 		} else {
 			double minEva = Double.POSITIVE_INFINITY;
 		}
 		return null;
+	}
+	private int Maximizer() {
+		return 0;
+	}
+	
+	private int Minimizer() {
+		return 0;
 	}
 }

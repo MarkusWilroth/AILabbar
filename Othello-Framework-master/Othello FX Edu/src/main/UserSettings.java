@@ -23,7 +23,7 @@ public class UserSettings {
 	/**
 	 * Determines the game mode to use
 	 */
-	public static final GameMode GAME_MODE = GameMode.HUMAN_VS_AGENT;
+	public static final GameMode GAME_MODE = GameMode.AGENT_VS_AGENT;
 	/**
 	 * Delay before the game starts when the agent is playing
 	 */
@@ -80,7 +80,7 @@ public class UserSettings {
 	 * Specially on systems running other OS than windows. This
 	 * is off by default.
 	 */
-	public static final boolean USE_ANIMATION = (TURN_INTERVAL >= 5000) ;
+	public static final boolean USE_ANIMATION = (TURN_INTERVAL >= 0) ;
 
 	/**
 	 * This defines the scale at which the
