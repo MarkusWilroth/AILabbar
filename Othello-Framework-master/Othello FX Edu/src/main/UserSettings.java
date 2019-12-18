@@ -33,7 +33,7 @@ public class UserSettings {
 	 * By popular rules the max search time should not
 	 * go above 5000 milliseconds;
 	 */
-	public static final int MAX_SEARCH_TIME = 4000;
+	public static final int MAX_SEARCH_TIME = 5000;
 	
 	/**
 	 * Used for defining the minimum search time
@@ -42,7 +42,7 @@ public class UserSettings {
 	 * has passed. Adjust in order for play consistency. when
 	 * Human vs Agent is activated.
 	 */
-	public static final int MIN_SEARCH_TIME = 0;
+	public static final int MIN_SEARCH_TIME = 1500;
 	
 	/**
 	 * Used for defining the search time
