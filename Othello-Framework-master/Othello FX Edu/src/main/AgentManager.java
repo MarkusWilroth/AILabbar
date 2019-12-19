@@ -53,9 +53,16 @@ public class AgentManager extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		//new Othello(primaryStage, new ExampleAgentOne(), new ExampleAgentTwo());
-		new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new AgentOne(PlayerTurn.PLAYER_TWO));
+		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new AgentOne(PlayerTurn.PLAYER_TWO));
 		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentTwo());
-		//new Othello(primaryStage, new ExampleAgentD());
+		//new Othello(primaryStage, new AgentOne());
+		
+		//MiniMax vs findBestMove
+		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentA(PlayerTurn.PLAYER_TWO));
+		//MiniMax vs findRandomMove
+		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentB(PlayerTurn.PLAYER_TWO));
+		//MiniMax vs findSafeMove
+		new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentC(PlayerTurn.PLAYER_TWO));
 	}
 
 	public static void main(String[] args) {

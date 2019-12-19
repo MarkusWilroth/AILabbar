@@ -26,7 +26,7 @@ public class ExampleAgentA extends Agent{
 		// TODO Auto-generated constructor stub
 	}
 	
-	private ExampleAgentA(PlayerTurn playerTurn) {
+	public ExampleAgentA(PlayerTurn playerTurn) {
 		super(playerTurn);
 		// TODO Auto-generated constructor stub
 	}
@@ -51,9 +51,9 @@ public class ExampleAgentA extends Agent{
 		
 		int waitTime = UserSettings.MIN_SEARCH_TIME; // 1.5 seconds
 		
-		ThreadManager.pause(TimeSpan.millis(waitTime)); // Pauses execution for the wait time to cause delay
+		//ThreadManager.pause(TimeSpan.millis(waitTime)); // Pauses execution for the wait time to cause delay
 		
-		return AgentController.getExampleMove(gameState, playerTurn); // returns an example AI move Note: this is not AB Pruning
+		return AgentController.findBestMove(gameState, playerTurn); // returns an example AI move Note: this is not AB Pruning
 	}
 
 }

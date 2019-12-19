@@ -35,7 +35,7 @@ public class AgentOne extends Agent {
 	}
 	
 	public AgentMove getMove(GameBoardState gameState) {
-		depth = 3;
+		depth = 5;
 		int waitTime = UserSettings.MIN_SEARCH_TIME; // 1.5 seconds
 		maxTime = UserSettings.MAX_SEARCH_TIME;
 		
@@ -54,7 +54,7 @@ public class AgentOne extends Agent {
 				
 				newMaxValue = MiniMax(gameState, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, playerTurn);
 				
-				if (newMaxValue > value) { 	//If the new value is better then the old value this is a better move
+				if (newMaxValue >= value) { 	//If the new value is better then the old value this is a better move
 					value = newMaxValue;	//Update the value
 					bestMove = new MoveWrapper(move);	//Update the bestMove
 				}
@@ -69,14 +69,14 @@ public class AgentOne extends Agent {
 				
 				newMinValue = MiniMax(gameState, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, playerTurn);
 				
-				if (newMinValue < value) {
+				if (newMinValue <= value) {
 					value = newMinValue;
 					bestMove = new MoveWrapper(move);
 				}
 			}
 		}
 		
-		ThreadManager.pause(TimeSpan.millis(waitTime));
+		//ThreadManager.pause(TimeSpan.millis(waitTime));
 		searchDepth = depth;
 		return bestMove;
 	}
