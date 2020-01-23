@@ -270,9 +270,7 @@ namespace Labb2_Knapsack {
                 }
                 Console.WriteLine("\n----------------------------------------\n");
             }
-            Console.WriteLine("Total Greed Value: " + totGreedValue);
-            Console.WriteLine("\n----------------------------------------\n");
-
+            
             foreach (Knapsack hoodKnap in hoodSackList) {
                 Console.WriteLine("The HoodKnap contains: " + hoodKnap.itemsInKnap.Count + " items\nTotal value: " + hoodKnap.totValue + "\nTotal weight: " + hoodKnap.totWeight + "\n");
                 Console.WriteLine("This knap contains these items:");
@@ -282,6 +280,7 @@ namespace Labb2_Knapsack {
                 }
                 Console.WriteLine("\n----------------------------------------\n");
             }
+            Console.WriteLine("Total Greed Value: " + totGreedValue);
             Console.WriteLine("Total Hood Value: " + totHoodValue);
             Console.WriteLine("\n----------------------------------------\n");
         }
