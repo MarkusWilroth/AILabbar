@@ -10,7 +10,7 @@ namespace Labb2_Knapsack {
         public int itemWeight, itemValue;
         public double huValue;
 
-        public Item(string itemName) {
+        public Item(string itemName, Random rand) {
             this.itemName = itemName;
 
             switch (itemName) {
@@ -41,9 +41,8 @@ namespace Labb2_Knapsack {
             }
 
             if (itemWeight <= 0 || itemValue <= 0) { //Kommer hit om det inte är något av följande items
-                Random rand = new Random();
-                int w = rand.Next(1, 7);
-                int v = rand.Next(1, 7);
+                int w = rand.Next(2, 7);
+                int v = rand.Next(2, 7);
                 itemWeight = w; //Alla random items får samma stats?...
                 itemValue = v;
             }

@@ -9,27 +9,31 @@ namespace Labb2_Knapsack {
     class Problem {
 
         static void Main(string[] ags) {
+
             int amountOfKnaps, amountOfItems, knapSize;
             string[] itemName; //Kan tas bort med finns lite för att det blir roligare och för att garantera att maxItemWeight > maxKnapWeight
             List<Knapsack> greedySackList; //För greedy algorithm
             List<Knapsack> hoodSackList; //För neighborhood search algorithm
             List<Item> itemList; //Alla våra items
+            List<Item> itemsLeft;
+            Random rand = new Random();
             
             amountOfKnaps = 2; //Hur många knaps vi vill ha
-            amountOfItems = 10; //Hur många items vi vill ha
+            amountOfItems = 15; //Hur många items vi vill ha
             knapSize = 10; //Hur mycket vikt varje knap kan hålla
 
             greedySackList = new List<Knapsack>();
             hoodSackList = new List<Knapsack>();
             itemList = new List<Item>();
+            itemsLeft = new List<Item>();
             itemName = new string[] { "axe", "pillow", "drugz", "computer", "nice rock", "ToroToro" };
 
             greedySackList = CreateKnapsacks(amountOfKnaps, knapSize); //Skapar greedySackList
             hoodSackList = CreateKnapsacks(amountOfKnaps, knapSize); //Skapar hooSackList (Anledningen för att vara uppdelade är för att de ska jämföras, hood måste vara bättre eller lika bra som greedy!
-            itemList = CreateItems(amountOfItems, itemName); //Skapar items
+            itemList = CreateItems(amountOfItems, itemName, rand); //Skapar items
 
-            Greedy(greedySackList, itemList); //Ska fylla greedySackList enligt en Greedy Algorithm
-            //Hood(hoodSackList, itemList);
+            Greedy(greedySackList, itemList , itemsLeft); //Ska fylla greedySackList enligt en Greedy Algorithm
+            Hood(hoodSackList, greedySackList, itemsLeft);
 
             PrintResult(itemList, greedySackList, hoodSackList);
 
@@ -46,15 +50,14 @@ namespace Labb2_Knapsack {
             return knapList;
         }
 
-        public static List<Item> CreateItems(int amountOfItems, string[] itemName) {
+        public static List<Item> CreateItems(int amountOfItems, string[] itemName, Random rand) {
             List<Item> itemList = new List<Item>();
             Item item;
             for (int i = 0; i < amountOfItems; i++) {
-                
                 if (i < itemName.Length) { //Om vi har flera items än vad jag har orkat ge namn till blir det ett vanligt Item
-                    item = new Item(itemName[i]);
+                    item = new Item(itemName[i], rand);
                 } else {
-                    item = new Item("Item("+ (i + 1) +")");
+                    item = new Item("Item("+ (i + 1) +")", rand);
                 }
                 itemList.Add(item);
                 
@@ -62,9 +65,9 @@ namespace Labb2_Knapsack {
             return itemList;
         }
 
-        public static void Greedy(List<Knapsack> greedyKnap, List<Item> items) { //Greedy Algorithm
+        public static void Greedy(List<Knapsack> greedyKnap, List<Item> items, List<Item> itemsLeft) { //Greedy Algorithm
             List<Item> greedyItem = new List<Item>(); //För att se till att vi inte behöver återställa items
-            List<Item> greedyItemLeft = new List<Item>();
+            List<Item> greedyItemLeft = itemsLeft;
             foreach (Item item in items) {
                 greedyItem.Add(item);
             }
@@ -104,30 +107,97 @@ namespace Labb2_Knapsack {
                     }
                     greedyItem.Remove(greedyItem[itemA]);
                 }
-                
-                
-
-            //if (item1 > item2) then we add item1 and we keep going throught the list testing item2 to the next ones.
-            //else if (item1 < item2) the we add item2 and we keep going through the list testing item1 to the next ones
-
-            //I got the "best" item... now where do I put it?
-            // - Randomly
-            // - The one wiht the less space -> without going over the limit
-            // - Other solutions
             }
         }
+        /* ToDo:
+         * 1. Start using the solution from the Greedy Algorithm
+         * 2. Find some near-solutions
+         * 3. Replace current solution if the new one is better
+         */
 
-        public static void Hood(List<Knapsack> hoodKnap, List<Item> items) {
-            List<Item> hoodItem = items;
+        public static void Hood(List<Knapsack> hoodKnap, List<Knapsack> greedKnap, List<Item> itemsLeft) {
+            //1. Ser till att hoodKnap börjar som det greedKnap fick fram
+            for (int i = 0; i < greedKnap.Count; i++) {
+                foreach (Item item in greedKnap[i].itemsInKnap) {
+                    hoodKnap[i].AddItem(item);
+                }
+            }
+            //Tar fram alla items som är "utanför" som kanske kan komma in
+            
+            List<Item> hoodItemLeft = new List<Item>();
+            foreach (Item item in itemsLeft) {
+                hoodItemLeft.Add(item);
+            }
+
             bool isDone = false;
 
             while (!isDone) {
                 //Kollar ifall det finns mer att göra
-                if(CheckIfDone(hoodKnap, hoodItem)) {
+                if(CheckIfDone(hoodKnap, hoodItemLeft)) {
                     break;
                 }
 
                 //Själva hood Algorithm
+                //Step 1: Kollar så det är de bästa items som ligger i väskan
+                bool foundChange = false; 
+                foreach (Knapsack hoodSack in hoodKnap) {
+                    foreach (Item sackItem in hoodSack.itemsInKnap) {
+                        foreach (Item leftItem in hoodItemLeft) {
+                            if (leftItem.itemValue >= sackItem.itemValue && leftItem.itemWeight < sackItem.itemWeight) { //Om detta är sant är det lika värdefullt men väger mindre (
+                                hoodSack.ReplaceItem(sackItem, leftItem);
+                                foundChange = true;
+                                break;
+                            }
+                        }
+                        if (foundChange) {
+                            break;
+                        }
+                    }
+                }
+                //Step 2: kolla om vi kan rotera några föremål så att det blir mer plats
+                int moveSize = 0;
+                Knapsack knapToGetItem = null;
+                foreach (Knapsack hoodSack in hoodKnap) {
+                    if (hoodSack.maxWeight - hoodSack.totWeight > 0) { //Den har plats för flera items, om den är smockfull vill vi inte röra den
+
+                        if (knapToGetItem != null) { //Om det redan finns en knap som behöver items
+                            moveSize = knapToGetItem.maxWeight - knapToGetItem.totWeight;
+                            foreach (Item item in hoodSack.itemsInKnap) {
+                                if (item.itemWeight <= moveSize) {
+                                    knapToGetItem.AddItem(item);
+                                    hoodSack.RemoveItem(item);
+                                    foundChange = true;
+                                    break;
+                                }
+                            }
+                        } else {
+                            knapToGetItem = hoodSack;
+                        }
+                    }
+                }
+                //Step 3: Kollar alla items ifall de kan få plats i någon knapsack
+                foreach(Knapsack hoodSack in hoodKnap) {
+                    if (hoodSack.maxWeight - hoodSack.totWeight > 0) {
+                        foreach (Item item in itemsLeft) {
+                            if (item.itemWeight <= hoodSack.maxWeight - hoodSack.totWeight) {
+                                hoodSack.AddItem(item);
+                                itemsLeft.Remove(item);
+                                foundChange = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!foundChange) {
+                    isDone = true;
+                    break;
+                } else {
+                    Console.WriteLine("Found a change");
+                }
+
+                //Idé kollar bland itemsLeft och items efter någon som har bättre eller lika huValue fast väger mindre
+                //Om en knapsack inte är helt full, testa att flytta föremål mellan varandra så kanske ett itemLeft får plats i en knapsack
             }
         }
 
@@ -176,6 +246,9 @@ namespace Labb2_Knapsack {
         public static void PrintResult(List<Item> itemList, List<Knapsack> greedySackList, List<Knapsack> hoodSackList) {
             int totItemValue = 0;
             int totItemWeight = 0;
+            int totGreedValue = 0;
+            int totHoodValue = 0;
+
             Console.WriteLine("\n----------------------------------------\n");
 
             Console.WriteLine("The items(" + itemList.Count + ") that have to be desputed:");
@@ -193,18 +266,24 @@ namespace Labb2_Knapsack {
                 Console.WriteLine("This knap contains these items:");
                 foreach (Item item in greedyKnap.itemsInKnap) {
                     Console.WriteLine("Item: " + item.itemName + ", value: " + item.itemValue + ", weight: " + item.itemWeight + ", huValue: " + item.huValue);
+                    totGreedValue += item.itemValue;
                 }
                 Console.WriteLine("\n----------------------------------------\n");
             }
+            Console.WriteLine("Total Greed Value: " + totGreedValue);
+            Console.WriteLine("\n----------------------------------------\n");
 
             foreach (Knapsack hoodKnap in hoodSackList) {
                 Console.WriteLine("The HoodKnap contains: " + hoodKnap.itemsInKnap.Count + " items\nTotal value: " + hoodKnap.totValue + "\nTotal weight: " + hoodKnap.totWeight + "\n");
                 Console.WriteLine("This knap contains these items:");
                 foreach (Item item in hoodKnap.itemsInKnap) {
                     Console.WriteLine("Item: " + item.itemName + ", value: " + item.itemValue + ", weight: " + item.itemWeight + ", huValue: " + item.huValue);
+                    totHoodValue += item.itemValue;
                 }
                 Console.WriteLine("\n----------------------------------------\n");
             }
+            Console.WriteLine("Total Hood Value: " + totHoodValue);
+            Console.WriteLine("\n----------------------------------------\n");
         }
     }
 }

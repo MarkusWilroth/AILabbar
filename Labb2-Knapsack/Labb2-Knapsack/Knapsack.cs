@@ -28,5 +28,22 @@ namespace Labb2_Knapsack {
                 return false;
             }
         }
+
+        public void ReplaceItem(Item itemToRemove, Item itemToAdd) {
+            itemsInKnap.Remove(itemToRemove);
+            itemsInKnap.Add(itemToAdd);
+
+            totWeight -= itemToRemove.itemWeight;
+            totValue -= itemToRemove.itemValue;
+
+            totWeight += itemToAdd.itemWeight;
+            totValue += itemToAdd.itemValue;
+        }
+
+        public void RemoveItem(Item itemToRemove) {
+            itemsInKnap.Remove(itemToRemove);
+            totWeight -= itemToRemove.itemWeight;
+            totValue -= itemToRemove.itemValue;
+        }
     }
 }
