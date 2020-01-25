@@ -12,42 +12,45 @@ namespace Labb2_Knapsack {
 
         public Item(string itemName, Random rand) {
             this.itemName = itemName;
-
-            switch (itemName) {
-                case "axe":
-                    itemWeight = 2;
-                    itemValue = 4;
-                    break;
-                case "pillow":
-                    itemWeight = 1;
-                    itemValue = 2;
-                    break;
-                case "drugz":
-                    itemWeight = 1;
-                    itemValue = 3;
-                    break;
-                case "computer":
-                    itemWeight = 4;
-                    itemValue = 5;
-                    break;
-                case "nice rock":
-                    itemWeight = 5;
-                    itemValue = 2;
-                    break;
-                case "ToroToro":
-                    itemWeight = 5;
-                    itemValue = 10;
-                    break;
-            }
-
-            if (itemWeight <= 0 || itemValue <= 0) { //Kommer hit om det inte är något av följande items
-                int w = rand.Next(2, 7);
-                int v = rand.Next(2, 7);
-                itemWeight = w; //Alla random items får samma stats?...
-                itemValue = v;
-            }
-
+            int w = rand.Next(2, 7);
+            int v = rand.Next(2, 7);
+            itemWeight = w; //Alla random items får samma stats?...
+            itemValue = v;
             huValue = (double)Decimal.Divide(itemValue, itemWeight);
+
+            //switch (itemName) {
+            //    case "axe":
+            //        itemWeight = 2;
+            //        itemValue = 4;
+            //        break;
+            //    case "pillow":
+            //        itemWeight = 1;
+            //        itemValue = 2;
+            //        break;
+            //    case "drugz":
+            //        itemWeight = 1;
+            //        itemValue = 3;
+            //        break;
+            //    case "computer":
+            //        itemWeight = 4;
+            //        itemValue = 5;
+            //        break;
+            //    case "nice rock":
+            //        itemWeight = 5;
+            //        itemValue = 2;
+            //        break;
+            //    case "ToroToro":
+            //        itemWeight = 5;
+            //        itemValue = 10;
+            //        break;
+            //}
+
+            //if (itemWeight <= 0 || itemValue <= 0) { //Kommer hit om det inte är något av följande items
+            //    int w = rand.Next(2, 7);
+            //    int v = rand.Next(2, 7);
+            //    itemWeight = w; //Alla random items får samma stats?...
+            //    itemValue = v;
+            //}
         }
 
     }

@@ -18,8 +18,8 @@ namespace Labb2_Knapsack {
             List<Item> itemsLeft;
             Random rand = new Random();
             
-            amountOfKnaps = 2; //Hur många knaps vi vill ha
-            amountOfItems = 15; //Hur många items vi vill ha
+            amountOfKnaps = 3; //Hur många knaps vi vill ha
+            amountOfItems = 30; //Hur många items vi vill ha
             knapSize = 10; //Hur mycket vikt varje knap kan hålla
 
             greedySackList = new List<Knapsack>();
@@ -145,6 +145,8 @@ namespace Labb2_Knapsack {
                         foreach (Item leftItem in hoodItemLeft) {
                             if (leftItem.itemValue >= sackItem.itemValue && leftItem.itemWeight < sackItem.itemWeight) { //Om detta är sant är det lika värdefullt men väger mindre (
                                 hoodSack.ReplaceItem(sackItem, leftItem);
+                                hoodItemLeft.Remove(leftItem);
+                                hoodItemLeft.Add(sackItem);
                                 foundChange = true;
                                 break;
                             }
@@ -178,10 +180,10 @@ namespace Labb2_Knapsack {
                 //Step 3: Kollar alla items ifall de kan få plats i någon knapsack
                 foreach(Knapsack hoodSack in hoodKnap) {
                     if (hoodSack.maxWeight - hoodSack.totWeight > 0) {
-                        foreach (Item item in itemsLeft) {
+                        foreach (Item item in hoodItemLeft) {
                             if (item.itemWeight <= hoodSack.maxWeight - hoodSack.totWeight) {
                                 hoodSack.AddItem(item);
-                                itemsLeft.Remove(item);
+                                hoodItemLeft.Remove(item);
                                 foundChange = true;
                                 break;
                             }
@@ -228,22 +230,24 @@ namespace Labb2_Knapsack {
         public static bool CheckIfDone(List<Knapsack> knapSack, List<Item> item) {
             bool isDone = false;
             int knapsWithPlace = 0;
-            foreach (Knapsack knap in knapSack) {
-                if (knap.totWeight < knap.maxWeight) {
+            foreach (Knapsack knap in knapSack) { //Kollar alla knaps ifall de har plats kvar
+                if (knap.totWeight < knap.maxWeight) { //Om derast totWeight är mindre än max weight har de plats kvar
                     knapsWithPlace++;
                 }
             }
-            if (knapsWithPlace <= 0) {
+            if (knapsWithPlace <= 0) { //Om det inte finns någon plats kvar är den klar
                 isDone = true;
+                return isDone;
             }
-            if (item.Count == 0) {
+            if (item.Count == 0) { //Om det inte finns några items kvar att kolla är den klar
                 isDone = true;
+                return isDone;
             }
 
-            return isDone;
+            return isDone; //Borde returna false (Kan egentligen ta bort isDone och bara ha return false, return true)
         }
 
-        public static void PrintResult(List<Item> itemList, List<Knapsack> greedySackList, List<Knapsack> hoodSackList) {
+        public static void PrintResult(List<Item> itemList, List<Knapsack> greedySackList, List<Knapsack> hoodSackList) { //Skriver ut resultatet
             int totItemValue = 0;
             int totItemWeight = 0;
             int totGreedValue = 0;
