@@ -55,7 +55,7 @@ public class AgentManager extends Application{
 		//new Othello(primaryStage, new ExampleAgentOne(), new ExampleAgentTwo());
 		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new AgentOne(PlayerTurn.PLAYER_TWO));
 		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentTwo());
-		new Othello(primaryStage, new AgentOne());
+		new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE));
 		
 		//MiniMax vs findBestMove
 		//new Othello(primaryStage, new AgentOne(PlayerTurn.PLAYER_ONE), new ExampleAgentA(PlayerTurn.PLAYER_TWO));

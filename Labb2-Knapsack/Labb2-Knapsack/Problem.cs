@@ -18,7 +18,7 @@ namespace Labb2_Knapsack {
             List<Item> itemsLeft;
             Random rand = new Random();
             
-            amountOfKnaps = 3; //Hur många knaps vi vill ha
+            amountOfKnaps = 2; //Hur många knaps vi vill ha
             amountOfItems = 30; //Hur många items vi vill ha
             knapSize = 10; //Hur mycket vikt varje knap kan hålla
 
@@ -168,6 +168,7 @@ namespace Labb2_Knapsack {
                                 if (item.itemWeight <= moveSize) {
                                     knapToGetItem.AddItem(item);
                                     hoodSack.RemoveItem(item);
+                                    knapToGetItem = null;
                                     foundChange = true;
                                     break;
                                 }
