@@ -114,7 +114,6 @@ public class MyPacMan extends Controller<MOVE>
 	public void MakeTree() {
 		ArrayList<String> attrList = new ArrayList<String>(attributes.keySet());
 		root = GenerateTree(trainingData, attrList);
-		//uncommenting next line will print the tree to the file David&Johns_DecisionTree.txt
 		root.Print(); 
 		ValidateTraning();
 	}

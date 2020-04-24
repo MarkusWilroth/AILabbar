@@ -81,17 +81,18 @@ public class Executor
 		//run game in asynchronous mode and record it to file for replay at a later stage.
 		boolean visual=true;
 		String fileName="replay.txt";
-		exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new RandomGhosts(),visual,fileName);
-		//exec.replayGame(fileName,visual);
+		//exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual,fileName);
+		exec.replayGame(fileName,visual);
 		*/
+		
 		
 		//run game for data collection
 		boolean visual=true;
 		MyPacMan pacman = new MyPacMan();
 		pacman.MakeTree();
-		exec.runGameTimed(pacman,new StarterGhosts(),visual);
+		exec.runGameTimed(pacman, new StarterGhosts(),visual);
 		//exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual, "myData/trainingData.txt");
-
+		
 	}
 	
     /**
