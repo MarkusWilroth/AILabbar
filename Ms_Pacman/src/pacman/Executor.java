@@ -61,7 +61,7 @@ public class Executor
 		exec.runGame(new RandomPacMan(),new RandomGhosts(),visual,delay);
   		 */
 		
-		///*
+		/*
 		//run the game in asynchronous mode.
 		boolean visual=true;
 //		exec.runGameTimed(new NearestPillPacMan(),new AggressiveGhosts(),visual);
@@ -83,13 +83,15 @@ public class Executor
 		String fileName="replay.txt";
 		exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new RandomGhosts(),visual,fileName);
 		//exec.replayGame(fileName,visual);
-		 */
+		*/
 		
 		//run game for data collection
+		boolean visual=true;
 		MyPacMan pacman = new MyPacMan();
 		pacman.MakeTree();
-		//exec.runGameTimed(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual);
-		exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual, "newTrainingData.txt");
+		exec.runGameTimed(pacman,new StarterGhosts(),visual);
+		//exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual, "myData/trainingData.txt");
+
 	}
 	
     /**

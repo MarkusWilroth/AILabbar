@@ -1,11 +1,11 @@
 ├─ "pinkyDist" = VERY_HIGH:
-|   ├─ "isPinkyEdible" = NO:
-|   |   ├─ "blinkyDist" = VERY_HIGH:
-|   |   |     └─ Return LEFT
-|   |   ├─ "blinkyDist" = HIGH:
-|   |   |   ├─ "blinkyDir" = DOWN:
-|   |   |   |     └─ Return UP
-|   |   |   ├─ "blinkyDir" = LEFT:
+|   ├─ "blinkyDist" = VERY_HIGH:
+|   |     └─ Return LEFT
+|   ├─ "blinkyDist" = HIGH:
+|   |   ├─ "blinkyDir" = DOWN:
+|   |   |     └─ Return UP
+|   |   ├─ "blinkyDir" = LEFT:
+|   |   |   ├─ "isPinkyEdible" = NO:
 |   |   |   |   ├─ "isSueEdible" = NO:
 |   |   |   |   |   ├─ "inkyDist" = VERY_HIGH:
 |   |   |   |   |   |     └─ Return UP
@@ -65,486 +65,145 @@
 |   |   |   |   |             └─ Return UP
 |   |   |   |   └─ "isSueEdible" = YES:
 |   |   |   |         └─ Return UP
-|   |   |   ├─ "blinkyDir" = RIGHT:
-|   |   |   |     └─ Return UP
-|   |   |   ├─ "blinkyDir" = UP:
-|   |   |   |     └─ Return UP
-|   |   |   └─ "blinkyDir" = NEUTRAL:
+|   |   |   └─ "isPinkyEdible" = YES:
 |   |   |         └─ Return UP
-|   |   ├─ "blinkyDist" = MEDIUM:
-|   |   |     └─ Return LEFT
-|   |   ├─ "blinkyDist" = LOW:
-|   |   |     └─ Return LEFT
-|   |   ├─ "blinkyDist" = VERY_LOW:
-|   |   |     └─ Return LEFT
-|   |   └─ "blinkyDist" = NONE:
-|   |         └─ Return LEFT
-|   └─ "isPinkyEdible" = YES:
-|       ├─ "blinkyDist" = VERY_HIGH:
-|       |     └─ Return RIGHT
-|       ├─ "blinkyDist" = HIGH:
-|       |   ├─ "blinkyDir" = DOWN:
-|       |   |     └─ Return RIGHT
-|       |   ├─ "blinkyDir" = LEFT:
-|       |   |   ├─ "isSueEdible" = NO:
-|       |   |   |     └─ Return RIGHT
-|       |   |   └─ "isSueEdible" = YES:
-|       |   |       ├─ "inkyDist" = VERY_HIGH:
-|       |   |       |   ├─ "inkyDir" = DOWN:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = LEFT:
-|       |   |       |   |   ├─ "sueDir" = DOWN:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = LEFT:
-|       |   |       |   |   |   ├─ "pinkyDir" = DOWN:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = LEFT:
-|       |   |       |   |   |   |   ├─ "sueDist" = VERY_HIGH:
-|       |   |       |   |   |   |   |   ├─ "isBlinkyEdible" = NO:
-|       |   |       |   |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   |   └─ "isBlinkyEdible" = YES:
-|       |   |       |   |   |   |   |       ├─ "isInkyEdible" = NO:
-|       |   |       |   |   |   |   |       |     └─ Return RIGHT
-|       |   |       |   |   |   |   |       └─ "isInkyEdible" = YES:
-|       |   |       |   |   |   |   |             └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = HIGH:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = MEDIUM:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = LOW:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = VERY_LOW:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   └─ "sueDist" = NONE:
-|       |   |       |   |   |   |         └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = RIGHT:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = UP:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   └─ "pinkyDir" = NEUTRAL:
-|       |   |       |   |   |         └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = RIGHT:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = UP:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   └─ "sueDir" = NEUTRAL:
-|       |   |       |   |         └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = RIGHT:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = UP:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   └─ "inkyDir" = NEUTRAL:
-|       |   |       |         └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = HIGH:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = MEDIUM:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = LOW:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = VERY_LOW:
-|       |   |       |     └─ Return RIGHT
-|       |   |       └─ "inkyDist" = NONE:
-|       |   |             └─ Return RIGHT
-|       |   ├─ "blinkyDir" = RIGHT:
-|       |   |   ├─ "isSueEdible" = NO:
-|       |   |   |     └─ Return RIGHT
-|       |   |   └─ "isSueEdible" = YES:
-|       |   |       ├─ "inkyDist" = VERY_HIGH:
-|       |   |       |   ├─ "inkyDir" = DOWN:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = LEFT:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = RIGHT:
-|       |   |       |   |   ├─ "sueDir" = DOWN:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = LEFT:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = RIGHT:
-|       |   |       |   |   |   ├─ "pinkyDir" = DOWN:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = LEFT:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = RIGHT:
-|       |   |       |   |   |   |   ├─ "sueDist" = VERY_HIGH:
-|       |   |       |   |   |   |   |   ├─ "isBlinkyEdible" = NO:
-|       |   |       |   |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   |   └─ "isBlinkyEdible" = YES:
-|       |   |       |   |   |   |   |       ├─ "isInkyEdible" = NO:
-|       |   |       |   |   |   |   |       |     └─ Return RIGHT
-|       |   |       |   |   |   |   |       └─ "isInkyEdible" = YES:
-|       |   |       |   |   |   |   |             └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = HIGH:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = MEDIUM:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = LOW:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   ├─ "sueDist" = VERY_LOW:
-|       |   |       |   |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   |   └─ "sueDist" = NONE:
-|       |   |       |   |   |   |         └─ Return RIGHT
-|       |   |       |   |   |   ├─ "pinkyDir" = UP:
-|       |   |       |   |   |   |     └─ Return RIGHT
-|       |   |       |   |   |   └─ "pinkyDir" = NEUTRAL:
-|       |   |       |   |   |         └─ Return RIGHT
-|       |   |       |   |   ├─ "sueDir" = UP:
-|       |   |       |   |   |     └─ Return RIGHT
-|       |   |       |   |   └─ "sueDir" = NEUTRAL:
-|       |   |       |   |         └─ Return RIGHT
-|       |   |       |   ├─ "inkyDir" = UP:
-|       |   |       |   |     └─ Return RIGHT
-|       |   |       |   └─ "inkyDir" = NEUTRAL:
-|       |   |       |         └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = HIGH:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = MEDIUM:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = LOW:
-|       |   |       |     └─ Return RIGHT
-|       |   |       ├─ "inkyDist" = VERY_LOW:
-|       |   |       |     └─ Return RIGHT
-|       |   |       └─ "inkyDist" = NONE:
-|       |   |             └─ Return RIGHT
-|       |   ├─ "blinkyDir" = UP:
-|       |   |     └─ Return RIGHT
-|       |   └─ "blinkyDir" = NEUTRAL:
-|       |         └─ Return RIGHT
-|       ├─ "blinkyDist" = MEDIUM:
-|       |     └─ Return RIGHT
-|       ├─ "blinkyDist" = LOW:
-|       |     └─ Return RIGHT
-|       ├─ "blinkyDist" = VERY_LOW:
-|       |     └─ Return RIGHT
-|       └─ "blinkyDist" = NONE:
-|             └─ Return RIGHT
+|   |   ├─ "blinkyDir" = RIGHT:
+|   |   |     └─ Return UP
+|   |   ├─ "blinkyDir" = UP:
+|   |   |     └─ Return UP
+|   |   └─ "blinkyDir" = NEUTRAL:
+|   |         └─ Return UP
+|   ├─ "blinkyDist" = MEDIUM:
+|   |     └─ Return LEFT
+|   ├─ "blinkyDist" = LOW:
+|   |     └─ Return LEFT
+|   ├─ "blinkyDist" = VERY_LOW:
+|   |     └─ Return LEFT
+|   └─ "blinkyDist" = NONE:
+|         └─ Return LEFT
 ├─ "pinkyDist" = HIGH:
-|   ├─ "sueDist" = VERY_HIGH:
-|   |   ├─ "blinkyDist" = VERY_HIGH:
-|   |   |     └─ Return RIGHT
-|   |   ├─ "blinkyDist" = HIGH:
-|   |   |   ├─ "pinkyDir" = DOWN:
-|   |   |   |     └─ Return LEFT
-|   |   |   ├─ "pinkyDir" = LEFT:
-|   |   |   |   ├─ "isPinkyEdible" = NO:
-|   |   |   |   |     └─ Return LEFT
-|   |   |   |   └─ "isPinkyEdible" = YES:
-|   |   |   |       ├─ "isSueEdible" = NO:
-|   |   |   |       |     └─ Return LEFT
-|   |   |   |       └─ "isSueEdible" = YES:
-|   |   |   |           ├─ "inkyDist" = VERY_HIGH:
-|   |   |   |           |   ├─ "blinkyDir" = DOWN:
-|   |   |   |           |   |     └─ Return LEFT
-|   |   |   |           |   ├─ "blinkyDir" = LEFT:
-|   |   |   |           |   |   ├─ "inkyDir" = DOWN:
-|   |   |   |           |   |   |     └─ Return LEFT
-|   |   |   |           |   |   ├─ "inkyDir" = LEFT:
-|   |   |   |           |   |   |   ├─ "sueDir" = DOWN:
-|   |   |   |           |   |   |   |     └─ Return LEFT
-|   |   |   |           |   |   |   ├─ "sueDir" = LEFT:
-|   |   |   |           |   |   |   |   ├─ "isBlinkyEdible" = NO:
-|   |   |   |           |   |   |   |   |     └─ Return LEFT
-|   |   |   |           |   |   |   |   └─ "isBlinkyEdible" = YES:
-|   |   |   |           |   |   |   |       ├─ "isInkyEdible" = NO:
-|   |   |   |           |   |   |   |       |     └─ Return LEFT
-|   |   |   |           |   |   |   |       └─ "isInkyEdible" = YES:
-|   |   |   |           |   |   |   |             └─ Return LEFT
-|   |   |   |           |   |   |   ├─ "sueDir" = RIGHT:
-|   |   |   |           |   |   |   |     └─ Return LEFT
-|   |   |   |           |   |   |   ├─ "sueDir" = UP:
-|   |   |   |           |   |   |   |     └─ Return LEFT
-|   |   |   |           |   |   |   └─ "sueDir" = NEUTRAL:
-|   |   |   |           |   |   |         └─ Return LEFT
-|   |   |   |           |   |   ├─ "inkyDir" = RIGHT:
-|   |   |   |           |   |   |     └─ Return LEFT
-|   |   |   |           |   |   ├─ "inkyDir" = UP:
-|   |   |   |           |   |   |     └─ Return LEFT
-|   |   |   |           |   |   └─ "inkyDir" = NEUTRAL:
-|   |   |   |           |   |         └─ Return LEFT
-|   |   |   |           |   ├─ "blinkyDir" = RIGHT:
-|   |   |   |           |   |     └─ Return LEFT
-|   |   |   |           |   ├─ "blinkyDir" = UP:
-|   |   |   |           |   |     └─ Return LEFT
-|   |   |   |           |   └─ "blinkyDir" = NEUTRAL:
-|   |   |   |           |         └─ Return LEFT
-|   |   |   |           ├─ "inkyDist" = HIGH:
-|   |   |   |           |     └─ Return LEFT
-|   |   |   |           ├─ "inkyDist" = MEDIUM:
-|   |   |   |           |     └─ Return LEFT
-|   |   |   |           ├─ "inkyDist" = LOW:
-|   |   |   |           |     └─ Return LEFT
-|   |   |   |           ├─ "inkyDist" = VERY_LOW:
-|   |   |   |           |     └─ Return LEFT
-|   |   |   |           └─ "inkyDist" = NONE:
-|   |   |   |                 └─ Return LEFT
-|   |   |   ├─ "pinkyDir" = RIGHT:
-|   |   |   |   ├─ "blinkyDir" = DOWN:
-|   |   |   |   |     └─ Return RIGHT
-|   |   |   |   ├─ "blinkyDir" = LEFT:
-|   |   |   |   |     └─ Return RIGHT
-|   |   |   |   ├─ "blinkyDir" = RIGHT:
-|   |   |   |   |   ├─ "isPinkyEdible" = NO:
-|   |   |   |   |   |     └─ Return RIGHT
-|   |   |   |   |   └─ "isPinkyEdible" = YES:
-|   |   |   |   |       ├─ "isSueEdible" = NO:
-|   |   |   |   |       |     └─ Return RIGHT
-|   |   |   |   |       └─ "isSueEdible" = YES:
-|   |   |   |   |           ├─ "inkyDist" = VERY_HIGH:
-|   |   |   |   |           |   ├─ "inkyDir" = DOWN:
-|   |   |   |   |           |   |     └─ Return RIGHT
-|   |   |   |   |           |   ├─ "inkyDir" = LEFT:
-|   |   |   |   |           |   |     └─ Return RIGHT
-|   |   |   |   |           |   ├─ "inkyDir" = RIGHT:
-|   |   |   |   |           |   |   ├─ "sueDir" = DOWN:
-|   |   |   |   |           |   |   |     └─ Return RIGHT
-|   |   |   |   |           |   |   ├─ "sueDir" = LEFT:
-|   |   |   |   |           |   |   |     └─ Return RIGHT
-|   |   |   |   |           |   |   ├─ "sueDir" = RIGHT:
-|   |   |   |   |           |   |   |   ├─ "isBlinkyEdible" = NO:
-|   |   |   |   |           |   |   |   |     └─ Return RIGHT
-|   |   |   |   |           |   |   |   └─ "isBlinkyEdible" = YES:
-|   |   |   |   |           |   |   |       ├─ "isInkyEdible" = NO:
-|   |   |   |   |           |   |   |       |     └─ Return RIGHT
-|   |   |   |   |           |   |   |       └─ "isInkyEdible" = YES:
-|   |   |   |   |           |   |   |             └─ Return RIGHT
-|   |   |   |   |           |   |   ├─ "sueDir" = UP:
-|   |   |   |   |           |   |   |     └─ Return RIGHT
-|   |   |   |   |           |   |   └─ "sueDir" = NEUTRAL:
-|   |   |   |   |           |   |         └─ Return RIGHT
-|   |   |   |   |           |   ├─ "inkyDir" = UP:
-|   |   |   |   |           |   |     └─ Return RIGHT
-|   |   |   |   |           |   └─ "inkyDir" = NEUTRAL:
-|   |   |   |   |           |         └─ Return RIGHT
-|   |   |   |   |           ├─ "inkyDist" = HIGH:
-|   |   |   |   |           |     └─ Return RIGHT
-|   |   |   |   |           ├─ "inkyDist" = MEDIUM:
-|   |   |   |   |           |     └─ Return RIGHT
-|   |   |   |   |           ├─ "inkyDist" = LOW:
-|   |   |   |   |           |     └─ Return RIGHT
-|   |   |   |   |           ├─ "inkyDist" = VERY_LOW:
-|   |   |   |   |           |     └─ Return RIGHT
-|   |   |   |   |           └─ "inkyDist" = NONE:
-|   |   |   |   |                 └─ Return RIGHT
-|   |   |   |   ├─ "blinkyDir" = UP:
-|   |   |   |   |     └─ Return RIGHT
-|   |   |   |   └─ "blinkyDir" = NEUTRAL:
-|   |   |   |         └─ Return RIGHT
-|   |   |   ├─ "pinkyDir" = UP:
-|   |   |   |     └─ Return LEFT
-|   |   |   └─ "pinkyDir" = NEUTRAL:
-|   |   |         └─ Return LEFT
-|   |   ├─ "blinkyDist" = MEDIUM:
-|   |   |     └─ Return RIGHT
-|   |   ├─ "blinkyDist" = LOW:
-|   |   |     └─ Return RIGHT
-|   |   ├─ "blinkyDist" = VERY_LOW:
-|   |   |     └─ Return RIGHT
-|   |   └─ "blinkyDist" = NONE:
-|   |         └─ Return RIGHT
-|   ├─ "sueDist" = HIGH:
-|   |     └─ Return UP
-|   ├─ "sueDist" = MEDIUM:
-|   |     └─ Return UP
-|   ├─ "sueDist" = LOW:
-|   |     └─ Return NEUTRAL
-|   ├─ "sueDist" = VERY_LOW:
-|   |     └─ Return NEUTRAL
-|   └─ "sueDist" = NONE:
-|       ├─ "blinkyDir" = DOWN:
-|       |     └─ Return NEUTRAL
-|       ├─ "blinkyDir" = LEFT:
-|       |     └─ Return NEUTRAL
-|       ├─ "blinkyDir" = RIGHT:
-|       |   ├─ "isPinkyEdible" = NO:
-|       |   |     └─ Return NEUTRAL
-|       |   └─ "isPinkyEdible" = YES:
-|       |         └─ Return UP
-|       ├─ "blinkyDir" = UP:
-|       |   ├─ "blinkyDist" = VERY_HIGH:
-|       |   |     └─ Return UP
-|       |   ├─ "blinkyDist" = HIGH:
-|       |   |     └─ Return UP
-|       |   ├─ "blinkyDist" = MEDIUM:
-|       |   |   ├─ "isPinkyEdible" = NO:
-|       |   |   |   ├─ "isSueEdible" = NO:
-|       |   |   |   |   ├─ "inkyDist" = VERY_HIGH:
-|       |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   ├─ "inkyDist" = HIGH:
-|       |   |   |   |   |   ├─ "inkyDir" = DOWN:
-|       |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   ├─ "inkyDir" = LEFT:
-|       |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   ├─ "inkyDir" = RIGHT:
-|       |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   ├─ "inkyDir" = UP:
-|       |   |   |   |   |   |   ├─ "sueDir" = DOWN:
-|       |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   ├─ "sueDir" = LEFT:
-|       |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   ├─ "sueDir" = RIGHT:
-|       |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   ├─ "sueDir" = UP:
-|       |   |   |   |   |   |   |   ├─ "pinkyDir" = DOWN:
-|       |   |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   |   ├─ "pinkyDir" = LEFT:
-|       |   |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   |   ├─ "pinkyDir" = RIGHT:
-|       |   |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   |   ├─ "pinkyDir" = UP:
-|       |   |   |   |   |   |   |   |   ├─ "isBlinkyEdible" = NO:
-|       |   |   |   |   |   |   |   |   |   ├─ "isInkyEdible" = NO:
-|       |   |   |   |   |   |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   |   |   |   |   |   └─ "isInkyEdible" = YES:
-|       |   |   |   |   |   |   |   |   |         └─ Return RIGHT
-|       |   |   |   |   |   |   |   |   └─ "isBlinkyEdible" = YES:
-|       |   |   |   |   |   |   |   |         └─ Return RIGHT
-|       |   |   |   |   |   |   |   └─ "pinkyDir" = NEUTRAL:
-|       |   |   |   |   |   |   |         └─ Return RIGHT
-|       |   |   |   |   |   |   └─ "sueDir" = NEUTRAL:
-|       |   |   |   |   |   |         └─ Return RIGHT
-|       |   |   |   |   |   └─ "inkyDir" = NEUTRAL:
-|       |   |   |   |   |         └─ Return RIGHT
-|       |   |   |   |   ├─ "inkyDist" = MEDIUM:
-|       |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   ├─ "inkyDist" = LOW:
-|       |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   ├─ "inkyDist" = VERY_LOW:
-|       |   |   |   |   |     └─ Return RIGHT
-|       |   |   |   |   └─ "inkyDist" = NONE:
-|       |   |   |   |         └─ Return RIGHT
-|       |   |   |   └─ "isSueEdible" = YES:
-|       |   |   |         └─ Return RIGHT
-|       |   |   └─ "isPinkyEdible" = YES:
-|       |   |         └─ Return UP
-|       |   ├─ "blinkyDist" = LOW:
-|       |   |     └─ Return UP
-|       |   ├─ "blinkyDist" = VERY_LOW:
-|       |   |     └─ Return UP
-|       |   └─ "blinkyDist" = NONE:
-|       |         └─ Return UP
-|       └─ "blinkyDir" = NEUTRAL:
-|             └─ Return NEUTRAL
+|     └─ Return UP
 ├─ "pinkyDist" = MEDIUM:
-|   ├─ "blinkyDir" = DOWN:
-|   |     └─ Return NEUTRAL
-|   ├─ "blinkyDir" = LEFT:
-|   |     └─ Return NEUTRAL
-|   ├─ "blinkyDir" = RIGHT:
-|   |     └─ Return NEUTRAL
-|   ├─ "blinkyDir" = UP:
-|   |     └─ Return DOWN
-|   └─ "blinkyDir" = NEUTRAL:
-|         └─ Return NEUTRAL
+|     └─ Return UP
 ├─ "pinkyDist" = LOW:
-|     └─ Return NEUTRAL
+|     └─ Return UP
 ├─ "pinkyDist" = VERY_LOW:
-|     └─ Return LEFT
+|     └─ Return UP
 └─ "pinkyDist" = NONE:
-    ├─ "blinkyDist" = VERY_HIGH:
-    |   ├─ "blinkyDir" = DOWN:
+    ├─ "blinkyDir" = DOWN:
+    |     └─ Return LEFT
+    ├─ "blinkyDir" = LEFT:
+    |     └─ Return LEFT
+    ├─ "blinkyDir" = RIGHT:
+    |   ├─ "blinkyDist" = VERY_HIGH:
     |   |     └─ Return LEFT
-    |   ├─ "blinkyDir" = LEFT:
+    |   ├─ "blinkyDist" = HIGH:
     |   |     └─ Return LEFT
-    |   ├─ "blinkyDir" = RIGHT:
+    |   ├─ "blinkyDist" = MEDIUM:
     |   |     └─ Return LEFT
-    |   ├─ "blinkyDir" = UP:
+    |   ├─ "blinkyDist" = LOW:
+    |   |     └─ Return LEFT
+    |   ├─ "blinkyDist" = VERY_LOW:
+    |   |     └─ Return LEFT
+    |   └─ "blinkyDist" = NONE:
+    |       ├─ "isPinkyEdible" = NO:
+    |       |   ├─ "isSueEdible" = NO:
+    |       |   |   ├─ "inkyDist" = VERY_HIGH:
+    |       |   |   |     └─ Return LEFT
+    |       |   |   ├─ "inkyDist" = HIGH:
+    |       |   |   |     └─ Return LEFT
+    |       |   |   ├─ "inkyDist" = MEDIUM:
+    |       |   |   |     └─ Return LEFT
+    |       |   |   ├─ "inkyDist" = LOW:
+    |       |   |   |     └─ Return LEFT
+    |       |   |   ├─ "inkyDist" = VERY_LOW:
+    |       |   |   |     └─ Return LEFT
+    |       |   |   └─ "inkyDist" = NONE:
+    |       |   |       ├─ "inkyDir" = DOWN:
+    |       |   |       |     └─ Return LEFT
+    |       |   |       ├─ "inkyDir" = LEFT:
+    |       |   |       |     └─ Return LEFT
+    |       |   |       ├─ "inkyDir" = RIGHT:
+    |       |   |       |   ├─ "sueDir" = DOWN:
+    |       |   |       |   |     └─ Return LEFT
+    |       |   |       |   ├─ "sueDir" = LEFT:
+    |       |   |       |   |     └─ Return LEFT
+    |       |   |       |   ├─ "sueDir" = RIGHT:
+    |       |   |       |   |   ├─ "pinkyDir" = DOWN:
+    |       |   |       |   |   |     └─ Return LEFT
+    |       |   |       |   |   ├─ "pinkyDir" = LEFT:
+    |       |   |       |   |   |     └─ Return LEFT
+    |       |   |       |   |   ├─ "pinkyDir" = RIGHT:
+    |       |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
+    |       |   |       |   |   |   |     └─ Return LEFT
+    |       |   |       |   |   |   ├─ "sueDist" = HIGH:
+    |       |   |       |   |   |   |     └─ Return LEFT
+    |       |   |       |   |   |   ├─ "sueDist" = MEDIUM:
+    |       |   |       |   |   |   |     └─ Return LEFT
+    |       |   |       |   |   |   ├─ "sueDist" = LOW:
+    |       |   |       |   |   |   |     └─ Return LEFT
+    |       |   |       |   |   |   ├─ "sueDist" = VERY_LOW:
+    |       |   |       |   |   |   |     └─ Return LEFT
+    |       |   |       |   |   |   └─ "sueDist" = NONE:
+    |       |   |       |   |   |       ├─ "isBlinkyEdible" = NO:
+    |       |   |       |   |   |       |   ├─ "isInkyEdible" = NO:
+    |       |   |       |   |   |       |   |     └─ Return LEFT
+    |       |   |       |   |   |       |   └─ "isInkyEdible" = YES:
+    |       |   |       |   |   |       |         └─ Return LEFT
+    |       |   |       |   |   |       └─ "isBlinkyEdible" = YES:
+    |       |   |       |   |   |             └─ Return LEFT
+    |       |   |       |   |   ├─ "pinkyDir" = UP:
+    |       |   |       |   |   |     └─ Return LEFT
+    |       |   |       |   |   └─ "pinkyDir" = NEUTRAL:
+    |       |   |       |   |         └─ Return LEFT
+    |       |   |       |   ├─ "sueDir" = UP:
+    |       |   |       |   |     └─ Return LEFT
+    |       |   |       |   └─ "sueDir" = NEUTRAL:
+    |       |   |       |         └─ Return LEFT
+    |       |   |       ├─ "inkyDir" = UP:
+    |       |   |       |     └─ Return LEFT
+    |       |   |       └─ "inkyDir" = NEUTRAL:
+    |       |   |             └─ Return LEFT
+    |       |   └─ "isSueEdible" = YES:
+    |       |         └─ Return LEFT
+    |       └─ "isPinkyEdible" = YES:
+    |             └─ Return LEFT
+    ├─ "blinkyDir" = UP:
+    |   ├─ "blinkyDist" = VERY_HIGH:
     |   |   ├─ "isPinkyEdible" = NO:
     |   |   |   ├─ "isSueEdible" = NO:
     |   |   |   |   ├─ "inkyDist" = VERY_HIGH:
-    |   |   |   |   |     └─ Return DOWN
+    |   |   |   |   |     └─ Return LEFT
     |   |   |   |   ├─ "inkyDist" = HIGH:
-    |   |   |   |   |     └─ Return DOWN
+    |   |   |   |   |     └─ Return LEFT
     |   |   |   |   ├─ "inkyDist" = MEDIUM:
-    |   |   |   |   |     └─ Return DOWN
+    |   |   |   |   |     └─ Return LEFT
     |   |   |   |   ├─ "inkyDist" = LOW:
-    |   |   |   |   |     └─ Return DOWN
+    |   |   |   |   |     └─ Return LEFT
     |   |   |   |   ├─ "inkyDist" = VERY_LOW:
-    |   |   |   |   |     └─ Return DOWN
+    |   |   |   |   |     └─ Return LEFT
     |   |   |   |   └─ "inkyDist" = NONE:
     |   |   |   |       ├─ "inkyDir" = DOWN:
-    |   |   |   |       |     └─ Return DOWN
+    |   |   |   |       |     └─ Return LEFT
     |   |   |   |       ├─ "inkyDir" = LEFT:
-    |   |   |   |       |     └─ Return DOWN
+    |   |   |   |       |     └─ Return LEFT
     |   |   |   |       ├─ "inkyDir" = RIGHT:
-    |   |   |   |       |     └─ Return DOWN
+    |   |   |   |       |     └─ Return LEFT
     |   |   |   |       ├─ "inkyDir" = UP:
     |   |   |   |       |   ├─ "sueDir" = DOWN:
-    |   |   |   |       |   |     └─ Return DOWN
+    |   |   |   |       |   |     └─ Return LEFT
     |   |   |   |       |   ├─ "sueDir" = LEFT:
-    |   |   |   |       |   |     └─ Return DOWN
+    |   |   |   |       |   |     └─ Return LEFT
     |   |   |   |       |   ├─ "sueDir" = RIGHT:
-    |   |   |   |       |   |     └─ Return DOWN
+    |   |   |   |       |   |     └─ Return LEFT
     |   |   |   |       |   ├─ "sueDir" = UP:
     |   |   |   |       |   |   ├─ "pinkyDir" = DOWN:
-    |   |   |   |       |   |   |     └─ Return DOWN
+    |   |   |   |       |   |   |     └─ Return LEFT
     |   |   |   |       |   |   ├─ "pinkyDir" = LEFT:
-    |   |   |   |       |   |   |     └─ Return DOWN
+    |   |   |   |       |   |   |     └─ Return LEFT
     |   |   |   |       |   |   ├─ "pinkyDir" = RIGHT:
-    |   |   |   |       |   |   |     └─ Return DOWN
+    |   |   |   |       |   |   |     └─ Return LEFT
     |   |   |   |       |   |   ├─ "pinkyDir" = UP:
-    |   |   |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
-    |   |   |   |       |   |   |   |     └─ Return DOWN
-    |   |   |   |       |   |   |   ├─ "sueDist" = HIGH:
-    |   |   |   |       |   |   |   |     └─ Return DOWN
-    |   |   |   |       |   |   |   ├─ "sueDist" = MEDIUM:
-    |   |   |   |       |   |   |   |     └─ Return DOWN
-    |   |   |   |       |   |   |   ├─ "sueDist" = LOW:
-    |   |   |   |       |   |   |   |     └─ Return DOWN
-    |   |   |   |       |   |   |   ├─ "sueDist" = VERY_LOW:
-    |   |   |   |       |   |   |   |     └─ Return DOWN
-    |   |   |   |       |   |   |   └─ "sueDist" = NONE:
-    |   |   |   |       |   |   |       ├─ "isBlinkyEdible" = NO:
-    |   |   |   |       |   |   |       |   ├─ "isInkyEdible" = NO:
-    |   |   |   |       |   |   |       |   |     └─ Return DOWN
-    |   |   |   |       |   |   |       |   └─ "isInkyEdible" = YES:
-    |   |   |   |       |   |   |       |         └─ Return DOWN
-    |   |   |   |       |   |   |       └─ "isBlinkyEdible" = YES:
-    |   |   |   |       |   |   |             └─ Return DOWN
-    |   |   |   |       |   |   └─ "pinkyDir" = NEUTRAL:
-    |   |   |   |       |   |         └─ Return DOWN
-    |   |   |   |       |   └─ "sueDir" = NEUTRAL:
-    |   |   |   |       |         └─ Return DOWN
-    |   |   |   |       └─ "inkyDir" = NEUTRAL:
-    |   |   |   |             └─ Return DOWN
-    |   |   |   └─ "isSueEdible" = YES:
-    |   |   |         └─ Return DOWN
-    |   |   └─ "isPinkyEdible" = YES:
-    |   |         └─ Return DOWN
-    |   └─ "blinkyDir" = NEUTRAL:
-    |         └─ Return LEFT
-    ├─ "blinkyDist" = HIGH:
-    |   ├─ "blinkyDir" = DOWN:
-    |   |     └─ Return LEFT
-    |   ├─ "blinkyDir" = LEFT:
-    |   |     └─ Return LEFT
-    |   ├─ "blinkyDir" = RIGHT:
-    |   |   ├─ "isPinkyEdible" = NO:
-    |   |   |   ├─ "isSueEdible" = NO:
-    |   |   |   |   ├─ "inkyDist" = VERY_HIGH:
-    |   |   |   |   |     └─ Return LEFT
-    |   |   |   |   ├─ "inkyDist" = HIGH:
-    |   |   |   |   |     └─ Return LEFT
-    |   |   |   |   ├─ "inkyDist" = MEDIUM:
-    |   |   |   |   |     └─ Return LEFT
-    |   |   |   |   ├─ "inkyDist" = LOW:
-    |   |   |   |   |     └─ Return LEFT
-    |   |   |   |   ├─ "inkyDist" = VERY_LOW:
-    |   |   |   |   |     └─ Return LEFT
-    |   |   |   |   └─ "inkyDist" = NONE:
-    |   |   |   |       ├─ "inkyDir" = DOWN:
-    |   |   |   |       |     └─ Return LEFT
-    |   |   |   |       ├─ "inkyDir" = LEFT:
-    |   |   |   |       |     └─ Return LEFT
-    |   |   |   |       ├─ "inkyDir" = RIGHT:
-    |   |   |   |       |   ├─ "sueDir" = DOWN:
-    |   |   |   |       |   |     └─ Return LEFT
-    |   |   |   |       |   ├─ "sueDir" = LEFT:
-    |   |   |   |       |   |     └─ Return LEFT
-    |   |   |   |       |   ├─ "sueDir" = RIGHT:
-    |   |   |   |       |   |   ├─ "pinkyDir" = DOWN:
-    |   |   |   |       |   |   |     └─ Return LEFT
-    |   |   |   |       |   |   ├─ "pinkyDir" = LEFT:
-    |   |   |   |       |   |   |     └─ Return LEFT
-    |   |   |   |       |   |   ├─ "pinkyDir" = RIGHT:
     |   |   |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
     |   |   |   |       |   |   |   |     └─ Return LEFT
     |   |   |   |       |   |   |   ├─ "sueDist" = HIGH:
@@ -563,162 +222,87 @@
     |   |   |   |       |   |   |       |         └─ Return LEFT
     |   |   |   |       |   |   |       └─ "isBlinkyEdible" = YES:
     |   |   |   |       |   |   |             └─ Return LEFT
-    |   |   |   |       |   |   ├─ "pinkyDir" = UP:
-    |   |   |   |       |   |   |     └─ Return LEFT
     |   |   |   |       |   |   └─ "pinkyDir" = NEUTRAL:
     |   |   |   |       |   |         └─ Return LEFT
-    |   |   |   |       |   ├─ "sueDir" = UP:
-    |   |   |   |       |   |     └─ Return LEFT
     |   |   |   |       |   └─ "sueDir" = NEUTRAL:
     |   |   |   |       |         └─ Return LEFT
-    |   |   |   |       ├─ "inkyDir" = UP:
-    |   |   |   |       |     └─ Return LEFT
     |   |   |   |       └─ "inkyDir" = NEUTRAL:
     |   |   |   |             └─ Return LEFT
     |   |   |   └─ "isSueEdible" = YES:
     |   |   |         └─ Return LEFT
     |   |   └─ "isPinkyEdible" = YES:
     |   |         └─ Return LEFT
-    |   ├─ "blinkyDir" = UP:
-    |   |     └─ Return LEFT
-    |   └─ "blinkyDir" = NEUTRAL:
-    |         └─ Return LEFT
-    ├─ "blinkyDist" = MEDIUM:
-    |     └─ Return LEFT
-    ├─ "blinkyDist" = LOW:
-    |     └─ Return LEFT
-    ├─ "blinkyDist" = VERY_LOW:
-    |     └─ Return LEFT
-    └─ "blinkyDist" = NONE:
-        ├─ "blinkyDir" = DOWN:
-        |     └─ Return LEFT
-        ├─ "blinkyDir" = LEFT:
-        |     └─ Return LEFT
-        ├─ "blinkyDir" = RIGHT:
-        |   ├─ "isPinkyEdible" = NO:
-        |   |   ├─ "isSueEdible" = NO:
-        |   |   |   ├─ "inkyDist" = VERY_HIGH:
-        |   |   |   |     └─ Return LEFT
-        |   |   |   ├─ "inkyDist" = HIGH:
-        |   |   |   |     └─ Return LEFT
-        |   |   |   ├─ "inkyDist" = MEDIUM:
-        |   |   |   |     └─ Return LEFT
-        |   |   |   ├─ "inkyDist" = LOW:
-        |   |   |   |     └─ Return LEFT
-        |   |   |   ├─ "inkyDist" = VERY_LOW:
-        |   |   |   |     └─ Return LEFT
-        |   |   |   └─ "inkyDist" = NONE:
-        |   |   |       ├─ "inkyDir" = DOWN:
-        |   |   |       |     └─ Return LEFT
-        |   |   |       ├─ "inkyDir" = LEFT:
-        |   |   |       |     └─ Return LEFT
-        |   |   |       ├─ "inkyDir" = RIGHT:
-        |   |   |       |   ├─ "sueDir" = DOWN:
-        |   |   |       |   |     └─ Return LEFT
-        |   |   |       |   ├─ "sueDir" = LEFT:
-        |   |   |       |   |     └─ Return LEFT
-        |   |   |       |   ├─ "sueDir" = RIGHT:
-        |   |   |       |   |   ├─ "pinkyDir" = DOWN:
-        |   |   |       |   |   |     └─ Return LEFT
-        |   |   |       |   |   ├─ "pinkyDir" = LEFT:
-        |   |   |       |   |   |     └─ Return LEFT
-        |   |   |       |   |   ├─ "pinkyDir" = RIGHT:
-        |   |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
-        |   |   |       |   |   |   |     └─ Return LEFT
-        |   |   |       |   |   |   ├─ "sueDist" = HIGH:
-        |   |   |       |   |   |   |     └─ Return LEFT
-        |   |   |       |   |   |   ├─ "sueDist" = MEDIUM:
-        |   |   |       |   |   |   |     └─ Return LEFT
-        |   |   |       |   |   |   ├─ "sueDist" = LOW:
-        |   |   |       |   |   |   |     └─ Return LEFT
-        |   |   |       |   |   |   ├─ "sueDist" = VERY_LOW:
-        |   |   |       |   |   |   |     └─ Return LEFT
-        |   |   |       |   |   |   └─ "sueDist" = NONE:
-        |   |   |       |   |   |       ├─ "isBlinkyEdible" = NO:
-        |   |   |       |   |   |       |   ├─ "isInkyEdible" = NO:
-        |   |   |       |   |   |       |   |     └─ Return LEFT
-        |   |   |       |   |   |       |   └─ "isInkyEdible" = YES:
-        |   |   |       |   |   |       |         └─ Return LEFT
-        |   |   |       |   |   |       └─ "isBlinkyEdible" = YES:
-        |   |   |       |   |   |             └─ Return LEFT
-        |   |   |       |   |   ├─ "pinkyDir" = UP:
-        |   |   |       |   |   |     └─ Return LEFT
-        |   |   |       |   |   └─ "pinkyDir" = NEUTRAL:
-        |   |   |       |   |         └─ Return LEFT
-        |   |   |       |   ├─ "sueDir" = UP:
-        |   |   |       |   |     └─ Return LEFT
-        |   |   |       |   └─ "sueDir" = NEUTRAL:
-        |   |   |       |         └─ Return LEFT
-        |   |   |       ├─ "inkyDir" = UP:
-        |   |   |       |     └─ Return LEFT
-        |   |   |       └─ "inkyDir" = NEUTRAL:
-        |   |   |             └─ Return LEFT
-        |   |   └─ "isSueEdible" = YES:
-        |   |         └─ Return LEFT
-        |   └─ "isPinkyEdible" = YES:
-        |         └─ Return LEFT
-        ├─ "blinkyDir" = UP:
-        |   ├─ "isPinkyEdible" = NO:
-        |   |   ├─ "isSueEdible" = NO:
-        |   |   |   ├─ "inkyDist" = VERY_HIGH:
-        |   |   |   |     └─ Return DOWN
-        |   |   |   ├─ "inkyDist" = HIGH:
-        |   |   |   |     └─ Return DOWN
-        |   |   |   ├─ "inkyDist" = MEDIUM:
-        |   |   |   |     └─ Return DOWN
-        |   |   |   ├─ "inkyDist" = LOW:
-        |   |   |   |     └─ Return DOWN
-        |   |   |   ├─ "inkyDist" = VERY_LOW:
-        |   |   |   |     └─ Return DOWN
-        |   |   |   └─ "inkyDist" = NONE:
-        |   |   |       ├─ "inkyDir" = DOWN:
-        |   |   |       |     └─ Return DOWN
-        |   |   |       ├─ "inkyDir" = LEFT:
-        |   |   |       |     └─ Return DOWN
-        |   |   |       ├─ "inkyDir" = RIGHT:
-        |   |   |       |     └─ Return DOWN
-        |   |   |       ├─ "inkyDir" = UP:
-        |   |   |       |   ├─ "sueDir" = DOWN:
-        |   |   |       |   |     └─ Return DOWN
-        |   |   |       |   ├─ "sueDir" = LEFT:
-        |   |   |       |   |     └─ Return DOWN
-        |   |   |       |   ├─ "sueDir" = RIGHT:
-        |   |   |       |   |     └─ Return DOWN
-        |   |   |       |   ├─ "sueDir" = UP:
-        |   |   |       |   |   ├─ "pinkyDir" = DOWN:
-        |   |   |       |   |   |     └─ Return DOWN
-        |   |   |       |   |   ├─ "pinkyDir" = LEFT:
-        |   |   |       |   |   |     └─ Return DOWN
-        |   |   |       |   |   ├─ "pinkyDir" = RIGHT:
-        |   |   |       |   |   |     └─ Return DOWN
-        |   |   |       |   |   ├─ "pinkyDir" = UP:
-        |   |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
-        |   |   |       |   |   |   |     └─ Return DOWN
-        |   |   |       |   |   |   ├─ "sueDist" = HIGH:
-        |   |   |       |   |   |   |     └─ Return DOWN
-        |   |   |       |   |   |   ├─ "sueDist" = MEDIUM:
-        |   |   |       |   |   |   |     └─ Return DOWN
-        |   |   |       |   |   |   ├─ "sueDist" = LOW:
-        |   |   |       |   |   |   |     └─ Return DOWN
-        |   |   |       |   |   |   ├─ "sueDist" = VERY_LOW:
-        |   |   |       |   |   |   |     └─ Return DOWN
-        |   |   |       |   |   |   └─ "sueDist" = NONE:
-        |   |   |       |   |   |       ├─ "isBlinkyEdible" = NO:
-        |   |   |       |   |   |       |   ├─ "isInkyEdible" = NO:
-        |   |   |       |   |   |       |   |     └─ Return DOWN
-        |   |   |       |   |   |       |   └─ "isInkyEdible" = YES:
-        |   |   |       |   |   |       |         └─ Return DOWN
-        |   |   |       |   |   |       └─ "isBlinkyEdible" = YES:
-        |   |   |       |   |   |             └─ Return DOWN
-        |   |   |       |   |   └─ "pinkyDir" = NEUTRAL:
-        |   |   |       |   |         └─ Return DOWN
-        |   |   |       |   └─ "sueDir" = NEUTRAL:
-        |   |   |       |         └─ Return DOWN
-        |   |   |       └─ "inkyDir" = NEUTRAL:
-        |   |   |             └─ Return DOWN
-        |   |   └─ "isSueEdible" = YES:
-        |   |         └─ Return DOWN
-        |   └─ "isPinkyEdible" = YES:
-        |         └─ Return DOWN
-        └─ "blinkyDir" = NEUTRAL:
-              └─ Return LEFT
+    |   ├─ "blinkyDist" = HIGH:
+    |   |     └─ Return DOWN
+    |   ├─ "blinkyDist" = MEDIUM:
+    |   |     └─ Return DOWN
+    |   ├─ "blinkyDist" = LOW:
+    |   |     └─ Return DOWN
+    |   ├─ "blinkyDist" = VERY_LOW:
+    |   |     └─ Return DOWN
+    |   └─ "blinkyDist" = NONE:
+    |       ├─ "isPinkyEdible" = NO:
+    |       |   ├─ "isSueEdible" = NO:
+    |       |   |   ├─ "inkyDist" = VERY_HIGH:
+    |       |   |   |     └─ Return DOWN
+    |       |   |   ├─ "inkyDist" = HIGH:
+    |       |   |   |     └─ Return DOWN
+    |       |   |   ├─ "inkyDist" = MEDIUM:
+    |       |   |   |     └─ Return DOWN
+    |       |   |   ├─ "inkyDist" = LOW:
+    |       |   |   |     └─ Return DOWN
+    |       |   |   ├─ "inkyDist" = VERY_LOW:
+    |       |   |   |     └─ Return DOWN
+    |       |   |   └─ "inkyDist" = NONE:
+    |       |   |       ├─ "inkyDir" = DOWN:
+    |       |   |       |     └─ Return DOWN
+    |       |   |       ├─ "inkyDir" = LEFT:
+    |       |   |       |     └─ Return DOWN
+    |       |   |       ├─ "inkyDir" = RIGHT:
+    |       |   |       |     └─ Return DOWN
+    |       |   |       ├─ "inkyDir" = UP:
+    |       |   |       |   ├─ "sueDir" = DOWN:
+    |       |   |       |   |     └─ Return DOWN
+    |       |   |       |   ├─ "sueDir" = LEFT:
+    |       |   |       |   |     └─ Return DOWN
+    |       |   |       |   ├─ "sueDir" = RIGHT:
+    |       |   |       |   |     └─ Return DOWN
+    |       |   |       |   ├─ "sueDir" = UP:
+    |       |   |       |   |   ├─ "pinkyDir" = DOWN:
+    |       |   |       |   |   |     └─ Return DOWN
+    |       |   |       |   |   ├─ "pinkyDir" = LEFT:
+    |       |   |       |   |   |     └─ Return DOWN
+    |       |   |       |   |   ├─ "pinkyDir" = RIGHT:
+    |       |   |       |   |   |     └─ Return DOWN
+    |       |   |       |   |   ├─ "pinkyDir" = UP:
+    |       |   |       |   |   |   ├─ "sueDist" = VERY_HIGH:
+    |       |   |       |   |   |   |     └─ Return DOWN
+    |       |   |       |   |   |   ├─ "sueDist" = HIGH:
+    |       |   |       |   |   |   |     └─ Return DOWN
+    |       |   |       |   |   |   ├─ "sueDist" = MEDIUM:
+    |       |   |       |   |   |   |     └─ Return DOWN
+    |       |   |       |   |   |   ├─ "sueDist" = LOW:
+    |       |   |       |   |   |   |     └─ Return DOWN
+    |       |   |       |   |   |   ├─ "sueDist" = VERY_LOW:
+    |       |   |       |   |   |   |     └─ Return DOWN
+    |       |   |       |   |   |   └─ "sueDist" = NONE:
+    |       |   |       |   |   |       ├─ "isBlinkyEdible" = NO:
+    |       |   |       |   |   |       |   ├─ "isInkyEdible" = NO:
+    |       |   |       |   |   |       |   |     └─ Return DOWN
+    |       |   |       |   |   |       |   └─ "isInkyEdible" = YES:
+    |       |   |       |   |   |       |         └─ Return DOWN
+    |       |   |       |   |   |       └─ "isBlinkyEdible" = YES:
+    |       |   |       |   |   |             └─ Return DOWN
+    |       |   |       |   |   └─ "pinkyDir" = NEUTRAL:
+    |       |   |       |   |         └─ Return DOWN
+    |       |   |       |   └─ "sueDir" = NEUTRAL:
+    |       |   |       |         └─ Return DOWN
+    |       |   |       └─ "inkyDir" = NEUTRAL:
+    |       |   |             └─ Return DOWN
+    |       |   └─ "isSueEdible" = YES:
+    |       |         └─ Return DOWN
+    |       └─ "isPinkyEdible" = YES:
+    |             └─ Return DOWN
+    └─ "blinkyDir" = NEUTRAL:
+          └─ Return LEFT
+Accuracy: 0.9111111111111111
