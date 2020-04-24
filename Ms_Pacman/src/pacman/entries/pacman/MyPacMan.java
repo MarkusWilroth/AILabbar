@@ -35,7 +35,7 @@ public class MyPacMan extends Controller<MOVE>
 	
 	public MyPacMan() {
 		try {
-			System.setOut(new PrintStream(new FileOutputStream("replay.txt")));
+			System.setOut(new PrintStream(new FileOutputStream("DT.txt")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
