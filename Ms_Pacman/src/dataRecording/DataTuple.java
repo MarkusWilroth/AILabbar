@@ -64,7 +64,7 @@ public class DataTuple {
 		if (move == MOVE.NEUTRAL) {
 			move = game.getPacmanLastMoveMade();
 		}
-
+		//System.out.println(game.getPacmanCurrentNodeIndex());
 		this.DirectionChosen = move;
 
 		this.mazeIndex = game.getMazeIndex();

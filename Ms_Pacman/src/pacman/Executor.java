@@ -87,7 +87,9 @@ public class Executor
 		
 		//run game for data collection
 		MyPacMan pacman = new MyPacMan();
-		exec.runGameTimed(pacman,new StarterGhosts(),visual);
+		pacman.MakeTree();
+		//exec.runGameTimed(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual);
+		exec.runGameTimedRecorded(new HumanController(new KeyBoardInput()),new StarterGhosts(),visual, "newTrainingData.txt");
 	}
 	
     /**

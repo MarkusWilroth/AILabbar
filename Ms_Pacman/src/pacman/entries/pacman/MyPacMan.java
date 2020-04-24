@@ -29,9 +29,17 @@ public class MyPacMan extends Controller<MOVE>
 	private ArrayList<DataTuple> trainingData;
 	private ArrayList<DataTuple> testData;
 	private static HashMap<String, ArrayList<String>> attributes;
+	
+	private Node root;
 	//private static ArrayList<String> attributeList;
 	
 	public MyPacMan() {
+		try {
+			System.setOut(new PrintStream(new FileOutputStream("src/pacman/entries/pacman/Markus&Toro_DT.txt")));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		GenerateTestData();
 		
 		SetAttributes();
@@ -103,8 +111,28 @@ public class MyPacMan extends Controller<MOVE>
 		}
 	}
 	
-	private void MakeTree() {
-		//attributeList
+	public void MakeTree() {
+		ArrayList<String> attrList = new ArrayList<String>(attributes.keySet());
+		root = GenerateTree(trainingData, attrList);
+		//uncommenting next line will print the tree to the file David&Johns_DecisionTree.txt
+		root.Print(); 
+		ValidateTraning();
+	}
+	
+	public double ValidateTraning() {
+		MOVE shouldBeMove, generatedMove;
+		double nbrOfCorrectMoves = 0, accuracy;
+		
+		for(int i = 0; i < testData.size(); i++) {
+			shouldBeMove = testData.get(i).DirectionChosen;
+			generatedMove = getMoveRecursively(root, testData.get(i));
+			if(shouldBeMove.toString().equals(generatedMove.toString())) {
+				nbrOfCorrectMoves++;
+			}
+		}
+		accuracy = nbrOfCorrectMoves / testData.size();
+		System.out.println("Accuracy: " + accuracy);
+		return accuracy;
 	}
 	
 	private Node GenerateTree(ArrayList<DataTuple> dataTuples,ArrayList<String> attributeList) {
@@ -120,6 +148,22 @@ public class MyPacMan extends Controller<MOVE>
 			return N; //(5) return N as a leaf node
 		}
 		
+		String A = AttributeSelection(attributes, dataTuples, attributeList);
+		N.setLabel(A);
+		attributeList.remove(A);
+		
+		ArrayList<String> valuesInA = attributes.get(A);
+		for (String aj : valuesInA) {
+			ArrayList<String> copyArrayList = (ArrayList<String>) attributeList.clone();
+			ArrayList<DataTuple> dj = CreateSubset(dataTuples, A, aj);
+			
+			if (dj.isEmpty()) {
+				N.addChild(aj, new Node(MajorityClass(dataTuples).toString()));
+			}
+			else {
+				N.addChild(aj, GenerateTree(dj, copyArrayList));
+			}
+		}
 		return N;
 	}
 	
@@ -156,7 +200,7 @@ public class MyPacMan extends Controller<MOVE>
 		return move;
 	}
 	
-	private void AttributeSelection(HashMap<String, ArrayList<String>> allAttributes,ArrayList<DataTuple> data, ArrayList<String> attributeList) {
+	private String AttributeSelection(HashMap<String, ArrayList<String>> allAttributes,ArrayList<DataTuple> data, ArrayList<String> attributeList) {
 		//InfoAD = SplitInfo
 		String splitAttribute = "";
 		double bestSplitInfo = Double.MAX_VALUE;
@@ -203,22 +247,71 @@ public class MyPacMan extends Controller<MOVE>
 							);
 				}
 			}
+			if (splitInfo < bestSplitInfo) {
+				bestSplitInfo = splitInfo;
+				splitAttribute = attributeList.get(i);
+			}
 		}
-		
-		
+		return splitAttribute;
 	}
 	
 	private double log2(double x) {
 		double result = 0;
+		if (x == 0) {
+			return 0;
+		} else {
+			result = (float)(Math.log(x) / Math.log(2));
+		}
 		return result;
+	}
+	
+	public ArrayList<DataTuple> CreateSubset(ArrayList<DataTuple> dataTuples, String attribute, String aj) {
+		ArrayList<DataTuple> newDataTuple = new ArrayList<DataTuple>();
+		for (DataTuple d : dataTuples) {
+			if (d.getAttributeValue(attribute).equals(aj)) {
+				newDataTuple.add(d);
+			}
+		}
+		return newDataTuple;
 	}
 	
 private MOVE myMove=MOVE.NEUTRAL;
 	
 	public MOVE getMove(Game game, long timeDue) 
 	{
+		DataTuple temp = new DataTuple(game, null);
+		//myMove = getMoveRecursively(root, temp);
 		//Place your game logic here to play the game as Ms Pac-Man
-		
+		myMove = getGoing(game);
 		return myMove;
+	}
+	
+	public MOVE getGoing(Game game) {
+		DataTuple temp = new DataTuple(game, null);
+		return getMoveRecursively(root, temp);
+	}
+	
+	public MOVE getMoveRecursively(Node node, DataTuple data) {
+		MOVE move = null;
+		//if leaf node is reached, return the move
+		if (node.isLeafNode()) {
+			 move = MOVE.valueOf(node.getLabel());
+		} else {
+			//get the label of the attribute
+			String valueNode = data.getAttributeValue(node.getName());
+			//get the childnodes 
+			HashMap hash = node.getChildren();
+			//go down to a certain childnode, depending on the value of the attribute
+			Node goToNode = (Node) hash.get(valueNode);
+			//recusively traverse
+			move = getMoveRecursively(goToNode, data);
+		}
+		return move;
+	}
+	public static void main(String[] args) {
+		MyPacMan pac = new MyPacMan();
+		pac.MakeTree();
+		pac.root.Print();
+		pac.ValidateTraning();
 	}
 }
