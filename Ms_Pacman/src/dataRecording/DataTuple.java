@@ -37,6 +37,11 @@ public class DataTuple {
 	public int currentLevelTime;
 	public int numOfPillsLeft;
 	public int numOfPowerPillsLeft;
+	public int blinkyIndex;
+	public int inkyIndex;
+	public int pinkyIndex;
+	public int sueIndex;
+	public boolean isJunction;
 
 	// Ghost this, dir, dist, edible - BLINKY, INKY, PINKY, SUE
 	public boolean isBlinkyEdible = false;
@@ -64,7 +69,7 @@ public class DataTuple {
 		if (move == MOVE.NEUTRAL) {
 			move = game.getPacmanLastMoveMade();
 		}
-		//System.out.println(game.getPacmanCurrentNodeIndex());
+
 		this.DirectionChosen = move;
 
 		this.mazeIndex = game.getMazeIndex();
@@ -76,6 +81,11 @@ public class DataTuple {
 		this.currentLevelTime = game.getCurrentLevelTime();
 		this.numOfPillsLeft = game.getNumberOfActivePills();
 		this.numOfPowerPillsLeft = game.getNumberOfActivePowerPills();
+		this.blinkyIndex = game.getGhostCurrentNodeIndex(GHOST.BLINKY);
+		this.inkyIndex = game.getGhostCurrentNodeIndex(GHOST.INKY);
+		this.pinkyIndex = game.getGhostCurrentNodeIndex(GHOST.PINKY);
+		this.sueIndex = game.getGhostCurrentNodeIndex(GHOST.SUE);
+		this.isJunction = game.isJunction(this.pacmanPosition);
 
 		if (game.getGhostLairTime(GHOST.BLINKY) == 0) {
 			this.isBlinkyEdible = game.isGhostEdible(GHOST.BLINKY);
@@ -264,6 +274,20 @@ public class DataTuple {
 		return DiscreteTag.DiscretizeDouble(aux);
 	}
 	
+	public String discreteDistance(int distance) {
+		String returnString = "";
+		if(distance <= 20 && distance >= 0) {
+			returnString = "LOW";
+		} 
+		else if(distance > 20 && distance < 50) {
+			returnString = "MEDIUM";
+		} 
+		else {
+			returnString = "HIGH";
+		}
+		return returnString;
+	}
+	
 	public String discreteBoolean(boolean b) {
 		if(b) return "YES";
 		else return "NO";
@@ -333,11 +357,12 @@ public class DataTuple {
 				
 				break;
 			case "isJunction":
-				//returnString = discreteBoolean(this.isJunction);
+				returnString = discreteBoolean(this.isJunction);
 				break;
 				
 		}
 		return returnString;
 	}
+	
 
 }

@@ -202,11 +202,11 @@ public final class Game
 	{
 		StringBuilder sb=new StringBuilder();
 
-		sb.append(mazeIndex+";"+totalTime+";"+score+";"+currentLevelTime+";"+levelCount+";"
-				+pacman.currentNodeIndex+";"+pacman.lastMoveMade+";"+pacman.numberOfLivesRemaining+";"+pacman.hasReceivedExtraLife+";");
+		sb.append(mazeIndex+","+totalTime+","+score+","+currentLevelTime+","+levelCount+","
+				+pacman.currentNodeIndex+","+pacman.lastMoveMade+","+pacman.numberOfLivesRemaining+","+pacman.hasReceivedExtraLife+",");
 
 		for(Ghost ghost : ghosts.values())
-			sb.append(ghost.currentNodeIndex+";"+ghost.edibleTime+";"+ghost.lairTime+";"+ghost.lastMoveMade+";");
+			sb.append(ghost.currentNodeIndex+","+ghost.edibleTime+","+ghost.lairTime+","+ghost.lastMoveMade+",");
 
 		for(int i=0;i<currentMaze.pillIndices.length;i++)
 			if(pills.get(i))
@@ -214,7 +214,7 @@ public final class Game
 			else
 				sb.append("0");
 
-		sb.append(";");
+		sb.append(",");
 		
 		for(int i=0;i<currentMaze.powerPillIndices.length;i++)
 			if(powerPills.get(i))
@@ -222,20 +222,20 @@ public final class Game
 			else
 				sb.append("0");
 		
-		sb.append(";");		
+		sb.append(",");		
 		sb.append(timeOfLastGlobalReversal);
-		sb.append(";");		
+		sb.append(",");		
 		sb.append(pacmanWasEaten);
-		sb.append(";");	
+		sb.append(",");	
 		
 		for(GHOST ghost : GHOST.values())
 		{
 			sb.append(ghostsEaten.get(ghost));
-			sb.append(";");
+			sb.append(",");
 		}
 		
 		sb.append(pillWasEaten);
-		sb.append(";");
+		sb.append(",");
 		sb.append(powerPillWasEaten);		
 		
 		return sb.toString();
@@ -249,7 +249,7 @@ public final class Game
 	 */
 	public void setGameState(String gameState)
 	{	
-		String[] values=gameState.split(";");
+		String[] values=gameState.split(",");
 		
 		int index=0;
 		
