@@ -37,11 +37,6 @@ public class DataTuple {
 	public int currentLevelTime;
 	public int numOfPillsLeft;
 	public int numOfPowerPillsLeft;
-	public int blinkyIndex;
-	public int inkyIndex;
-	public int pinkyIndex;
-	public int sueIndex;
-	public boolean isJunction;
 
 	// Ghost this, dir, dist, edible - BLINKY, INKY, PINKY, SUE
 	public boolean isBlinkyEdible = false;
@@ -81,11 +76,6 @@ public class DataTuple {
 		this.currentLevelTime = game.getCurrentLevelTime();
 		this.numOfPillsLeft = game.getNumberOfActivePills();
 		this.numOfPowerPillsLeft = game.getNumberOfActivePowerPills();
-		this.blinkyIndex = game.getGhostCurrentNodeIndex(GHOST.BLINKY);
-		this.inkyIndex = game.getGhostCurrentNodeIndex(GHOST.INKY);
-		this.pinkyIndex = game.getGhostCurrentNodeIndex(GHOST.PINKY);
-		this.sueIndex = game.getGhostCurrentNodeIndex(GHOST.SUE);
-		this.isJunction = game.isJunction(this.pacmanPosition);
 
 		if (game.getGhostLairTime(GHOST.BLINKY) == 0) {
 			this.isBlinkyEdible = game.isGhostEdible(GHOST.BLINKY);
@@ -289,15 +279,13 @@ public class DataTuple {
 	}
 	
 	public String discreteBoolean(boolean b) {
-		if(b) return "YES";
-		else return "NO";
+		if(b) { 
+			return "YES";
+		}
+		else {
+			return "NO";
+		}
 	}
-	
-	public String sameDirection(MOVE ghostDirection) {
-		if(ghostDirection == this.DirectionChosen) return "YES";
-		else return "NO";
-	}
-	
 	public String getAttributeValue(String attribute) {
 		String returnString = "";
 		switch(attribute) {
@@ -314,19 +302,15 @@ public class DataTuple {
 				returnString = discreteBoolean(this.isSueEdible);
 				break;
 			case "blinkyDist":
-//				returnString = discreteDistance(this.blinkyDist);
 				returnString = discretizeDistance(this.blinkyDist).toString();
 				break;
 			case "inkyDist":
-//				returnString = discreteDistance(this.inkyDist);
 				returnString = discretizeDistance(this.inkyDist).toString();
 				break;
 			case "pinkyDist":
-//				returnString = discreteDistance(this.pinkyDist);
 				returnString = discretizeDistance(this.pinkyDist).toString();
 				break;
 			case "sueDist":
-//				returnString = discreteDistance(this.sueDist);
 				returnString = discretizeDistance(this.sueDist).toString();
 				break;
 			case "blinkyDir":
@@ -340,26 +324,7 @@ public class DataTuple {
 				break;
 			case "sueDir":
 				returnString = this.sueDir.toString();
-				break;
-			case "blinkySameDir":
-				returnString = sameDirection(this.blinkyDir);
-				break;
-			case "inkySameDir":
-				returnString = sameDirection(this.inkyDir);
-				break;
-			case "pinkySameDir":
-				returnString = sameDirection(this.pinkyDir);
-				break;
-			case "sueSameDir":
-				returnString = sameDirection(this.sueDir);
-				break;
-			case "powerPillClose":
-				
-				break;
-			case "isJunction":
-				returnString = discreteBoolean(this.isJunction);
-				break;
-				
+				break;				
 		}
 		return returnString;
 	}

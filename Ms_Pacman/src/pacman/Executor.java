@@ -90,7 +90,7 @@ public class Executor
 		boolean visual=true;
 		MyPacMan pacman = new MyPacMan();
 		pacman.MakeTree();
-		exec.runGameTimed(pacman, new RandomGhosts(),visual);
+		exec.runGameTimed(pacman, new StarterGhosts(),visual);
 		
 		//exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
 		
