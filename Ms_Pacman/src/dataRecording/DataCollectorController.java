@@ -6,6 +6,8 @@ import pacman.game.Constants.GHOST;
 import pacman.game.Game;
 import pacman.game.Constants.MOVE;
 
+import java.util.ArrayList;
+
 /**
  * The DataCollectorHumanController class is used to collect training data from playing PacMan.
  * Data about game state and what MOVE chosen is saved every time getMove is called.
@@ -13,6 +15,7 @@ import pacman.game.Constants.MOVE;
  *
  */
 public class DataCollectorController extends HumanController{
+	private ArrayList<DataTuple> allData = new ArrayList<DataTuple>();
 	
 	public DataCollectorController(KeyBoardInput input){
 		super(input);
@@ -23,8 +26,16 @@ public class DataCollectorController extends HumanController{
 		MOVE move = super.getMove(game, dueTime);
 		
 		DataTuple data = new DataTuple(game, move);
+		allData.add(data);
+		
+		if (game.getScore() >= 4000) {
+			for (DataTuple dataToAdd : allData) {
+				DataSaverLoader.SavePacManData(dataToAdd);
+			}
+			allData.clear();
+		}
 				
-		DataSaverLoader.SavePacManData(data);		
+				
 		return move;
 	}
 

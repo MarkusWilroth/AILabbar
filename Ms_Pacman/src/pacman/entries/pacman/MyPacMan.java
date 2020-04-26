@@ -28,9 +28,12 @@ public class MyPacMan extends Controller<MOVE>
 	private ArrayList<String> directions;
 	private ArrayList<DataTuple> trainingData;
 	private ArrayList<DataTuple> testData;
+	private ArrayList<DataTuple> saveData = new ArrayList<DataTuple>();
 	private static HashMap<String, ArrayList<String>> attributes;
 	
 	private Node root;
+	public int scoreGoal;
+	public boolean isTraining;
 	//private static ArrayList<String> attributeList;
 	
 	public MyPacMan() {
@@ -43,15 +46,8 @@ public class MyPacMan extends Controller<MOVE>
 		GenerateTestData();
 		
 		SetAttributes();
-		
-		/* ToDo:
-		 * Generate testData
-		 * Build Tree
-		 * Generate Tree
-		 */
-		
-		
 	}
+	
 	private void SetAttributes() {
 		yesOrNo = new ArrayList<String>();
 		yesOrNo.add("YES");
@@ -235,7 +231,7 @@ public class MyPacMan extends Controller<MOVE>
 						neutral++;						
 					}
 				}
-				double T = eachValueCounter;
+				double T = eachValueCounter; //Skriv ekvationen från 8.2
 				if (T != 0.0) {
 					splitInfo += (T / data.size()) * (
 							- ((up / T)      * (log2(up/T)))
@@ -246,7 +242,7 @@ public class MyPacMan extends Controller<MOVE>
 							);
 				}
 			}
-			if (splitInfo < bestSplitInfo) {
+			if (splitInfo < bestSplitInfo) {	//Kollar om bestSplitInfo ska ändras
 				bestSplitInfo = splitInfo;
 				splitAttribute = attributeList.get(i);
 			}
@@ -257,7 +253,7 @@ public class MyPacMan extends Controller<MOVE>
 	private double log2(double x) {
 		double result = 0;
 		if (x == 0) {
-			return 0;
+			result = 0;
 		} else {
 			result = (float)(Math.log(x) / Math.log(2));
 		}
@@ -281,7 +277,21 @@ private MOVE myMove=MOVE.NEUTRAL;
 		DataTuple temp = new DataTuple(game, null);
 		//myMove = getMoveRecursively(root, temp);
 		//Place your game logic here to play the game as Ms Pac-Man
-		myMove = getGoing(game);
+		myMove = getMoveRecursively(root, temp);
+		//myMove = getGoing(game);
+		
+		if (isTraining) {
+			DataTuple data = new DataTuple(game, myMove);
+			saveData.add(data);
+			
+			if (game.getScore() >= scoreGoal) {
+				for (DataTuple dataToAdd : saveData) {
+					DataSaverLoader.SavePacManData(dataToAdd);
+				}
+				saveData.clear();
+			}
+		}
+		
 		return myMove;
 	}
 	
