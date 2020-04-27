@@ -1,6 +1,9 @@
 package pacman.controllers.examples;
 
 import java.util.ArrayList;
+
+import dataRecording.DataSaverLoader;
+import dataRecording.DataTuple;
 import pacman.controllers.Controller;
 import pacman.game.Game;
 
@@ -18,7 +21,17 @@ import static pacman.game.Constants.*;
  */
 public class StarterPacMan extends Controller<MOVE>
 {	
+	private ArrayList<DataTuple> saveData = new ArrayList<DataTuple>();
+	
+	
 	private static final int MIN_DISTANCE=20;	//if a ghost is this close, run away
+	private MOVE myMove;
+	public int scoreGoal;
+	public float timeGoal;
+	public int score;
+	public int totalScore;
+	public float totalTime;
+	public float newTime;
 	
 	public MOVE getMove(Game game,long timeDue)
 	{			
@@ -68,8 +81,28 @@ public class StarterPacMan extends Controller<MOVE>
 		for(int i=0;i<targetsArray.length;i++)
 			targetsArray[i]=targets.get(i);
 		
+		
+		myMove = game.getNextMoveTowardsTarget(current,game.getClosestNodeIndexFromNodeIndex(current,targetsArray,DM.PATH),DM.PATH);
+		DataTuple data = new DataTuple(game, myMove);
+		saveData.add(data);
+		
+		if (game.wasPacManEaten()) {
+			totalScore = game.getScore();
+			totalTime = game.getTotalTime();
+			saveData.clear();
+		}
+		
+		score = game.getScore() - totalScore; //Får score från det aktiva livet
+		newTime = game.getTotalTime() - totalTime;
+		
+		if (score >= scoreGoal && newTime >= timeGoal) {
+			for (DataTuple dataToAdd : saveData) {
+				DataSaverLoader.SavePacManData(dataToAdd);
+			}
+			saveData.clear();
+		}
 		//return the next direction once the closest target has been identified
-		return game.getNextMoveTowardsTarget(current,game.getClosestNodeIndexFromNodeIndex(current,targetsArray,DM.PATH),DM.PATH);
+		return myMove;
 	}
 }
 

@@ -51,9 +51,9 @@ public class Executor
 
 		
 		//run multiple games in batch mode - good for testing.
-		int numTrials=10;
+		int numTrials=20;
 		boolean isHumanPlayer = false;
-		boolean isCollector = true;
+		boolean isCollector = false;
 		boolean visual=true;
 //		exec.runExperiment(new RandomPacMan(),new RandomGhosts(),numTrials);
 		
@@ -62,17 +62,20 @@ public class Executor
 			
 		} else {
 			MyPacMan pacman = new MyPacMan();
+			
 			pacman.MakeTree();
 			
 			
 			if (isCollector) {
 				visual = true;
 				pacman.isTraining = true;
-				pacman.scoreGoal = 400;
-				pacman.timeGoal = 300;
+				
 				for (int i = 0; i < numTrials; i++) {
-					exec.runGameTimed(pacman, new StarterGhosts(),visual);
-					System.out.println("Game finished with score: " + pacman.score + " - Time: " + pacman.newTime);
+					StarterPacMan starterPac = new StarterPacMan();
+					starterPac.scoreGoal = 500;
+					starterPac.timeGoal = 300;
+					exec.runGameTimed(starterPac, new StarterGhosts(),visual);
+					System.out.println("Game finished with score: " + starterPac.score + " - Time: " + starterPac.newTime);
 				}
 			} else {
 				visual = true;
