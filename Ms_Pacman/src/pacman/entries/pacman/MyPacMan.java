@@ -33,6 +33,11 @@ public class MyPacMan extends Controller<MOVE>
 	
 	private Node root;
 	public int scoreGoal;
+	public float timeGoal;
+	public int score;
+	public int totalScore;
+	public float totalTime;
+	public float newTime;
 	public boolean isTraining;
 	//private static ArrayList<String> attributeList;
 	
@@ -284,14 +289,23 @@ private MOVE myMove=MOVE.NEUTRAL;
 			DataTuple data = new DataTuple(game, myMove);
 			saveData.add(data);
 			
-			if (game.getScore() >= scoreGoal) {
+			if (game.wasPacManEaten()) {
+				totalScore = game.getScore();
+				totalTime = game.getTotalTime();
+				saveData.clear();
+			}
+			
+			score = game.getScore() - totalScore; //Får score från det aktiva livet
+			newTime = game.getTotalTime() - totalTime;
+			
+			if (score >= scoreGoal && newTime >= timeGoal) {
 				for (DataTuple dataToAdd : saveData) {
 					DataSaverLoader.SavePacManData(dataToAdd);
 				}
 				saveData.clear();
 			}
 		}
-		
+		score = game.getScore();
 		return myMove;
 	}
 	

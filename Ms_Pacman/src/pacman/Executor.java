@@ -44,6 +44,7 @@ public class Executor
 	 *
 	 * @param args the command line arguments
 	 */
+	
 	public static void main(String[] args)
 	{
 		Executor exec=new Executor();
@@ -51,8 +52,34 @@ public class Executor
 		
 		//run multiple games in batch mode - good for testing.
 		int numTrials=10;
+		boolean isHumanPlayer = false;
+		boolean isCollector = true;
+		boolean visual=true;
 //		exec.runExperiment(new RandomPacMan(),new RandomGhosts(),numTrials);
-		 
+		
+		if (isHumanPlayer) {
+			exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
+			
+		} else {
+			MyPacMan pacman = new MyPacMan();
+			pacman.MakeTree();
+			
+			
+			if (isCollector) {
+				visual = true;
+				pacman.isTraining = true;
+				pacman.scoreGoal = 400;
+				pacman.timeGoal = 300;
+				for (int i = 0; i < numTrials; i++) {
+					exec.runGameTimed(pacman, new StarterGhosts(),visual);
+					System.out.println("Game finished with score: " + pacman.score + " - Time: " + pacman.newTime);
+				}
+			} else {
+				visual = true;
+				pacman.isTraining = false;
+				exec.runGameTimed(pacman, new StarterGhosts(),visual);
+			}
+		}
 		
 		/*
 		//run a game in synchronous mode: game waits until controllers respond.
@@ -87,14 +114,10 @@ public class Executor
 		
 		
 		//run game for data collection
-		boolean visual=true;
-		//MyPacMan pacman = new MyPacMan();
-		//pacman.MakeTree();
-		//pacman.isTraining = true;
-		//pacman.scoreGoal = 4000;
-		//exec.runGameTimed(pacman, new StarterGhosts(),visual);
 		
-		exec.runGameTimed(new DataCollectorController(new KeyBoardInput()),new StarterGhosts(),visual);
+		
+		
+		
 		
 	}
 	
